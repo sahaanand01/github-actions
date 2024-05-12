@@ -1,0 +1,17 @@
+name: 03-Workflow-Runners
+on: workflow_dispatch
+
+jobs:
+    echo-ubunutu:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Show OS Name
+            run: |
+                echo "The OS is : $RUNNER_OS"
+    echo-windows:
+        runs-on: windows-latest
+        steps:
+          - name: Show OS Name
+            shell: bash
+            run: |
+                echo "This is $RUNNER_NAME OS"
