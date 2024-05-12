@@ -14,4 +14,4 @@ jobs:
           - name: Show OS Name
             shell: bash
             run: |
-                echo "This is $RUNNER_NAME OS"
+                echo "This is $RUNNER_OS OS"
