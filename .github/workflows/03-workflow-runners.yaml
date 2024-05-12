@@ -12,6 +12,6 @@ jobs:
         runs-on: windows-latest
         steps:
           - name: Show OS Name
-            shell: bash
+            shell: bash #Using this becuse the env var $RUNNING_OS supports in bash shell.
             run: |
-                echo "This is $RUNNER_NAME OS"
+                echo "This is $RUNNER_OS OS"
