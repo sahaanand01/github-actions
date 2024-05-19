@@ -1,5 +1,5 @@
 name: 04-Actions-Workflow
-on: push
+on: workflow_dispatch
 
 jobs:
   build:
@@ -10,9 +10,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      
     - name: Install dependencies
       run: npm ci
-
+     # working-directory: 04-actions-github/my-app - We can directly mention this in defaults to ignore replicate the same values in run object.
     - name: Test
       run: npm test
+    #  working-directory: 04-actions-github/my-app
