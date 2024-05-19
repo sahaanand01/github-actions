@@ -4,8 +4,15 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 04-actions-github/my-app
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Printing Folders
-      run: ls
+      
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Test
+      run: npm test
