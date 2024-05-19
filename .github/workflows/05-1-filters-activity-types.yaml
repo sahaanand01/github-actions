@@ -1,0 +1,11 @@
+name: 05-1-Event Filters and Action Types
+on:
+    pull_request: 
+        branches: 
+            - main
+jobs:
+    echo-print:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print Pipeline Description
+              run: echo "Pipeline will trigger if any pull request have been created on main branch"
