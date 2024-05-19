@@ -8,4 +8,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print Pipeline Description
-              run: echo "Pipeline will trigger if any pull request have been created on main branch"
+              run: echo "Pipeline will trigger if any pull request have been created on main branch."
