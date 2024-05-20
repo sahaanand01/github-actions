@@ -1,6 +1,8 @@
 name: 06-Contexts
 run-name: 06-Contexts
-on: push
+on: 
+   - push
+   - workflow_dispatch
 
 
 # Actor used in the first step give the output of the author of the pipeline
@@ -20,4 +22,4 @@ jobs:
 
             - name: Printing the variable
               run: |
-                echo "Print My Variable ${{ vars.MY_VAR }}"
+                echo "Print My Variable: ${{ vars.MY_VAR }}"
