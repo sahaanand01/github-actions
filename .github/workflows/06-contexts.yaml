@@ -1,14 +1,28 @@
 name: 06-Contexts
-run-name: 06-Contexts
+run-name: 06-Contexts | DEBUG ${{ inputs.debug }} | LOG ${{ inputs.log }}
 on: 
-   - push
-   - workflow_dispatch
+   push:
+   workflow_dispatch:
+     inputs:
+       debug:
+        type: boolean
+        default: false
+       log:
+        type: boolean
+        default: true
+
+env:
+    WORKFLOW_VAR: workflow
+    OVERWRITTEN_VAR: workflow
 
 
 # Actor used in the first step give the output of the author of the pipeline
 jobs:
     print-context:
         runs-on: ubuntu-latest
+        env:
+          JOB_VAR: job
+          OVERWRITTEN_VAR: job
         steps:
             - name: Printing Contexts
               run: |
@@ -23,3 +37,19 @@ jobs:
             - name: Printing the variable
               run: |
                 echo "Print My Variable: ${{ vars.MY_VAR }}"
+    
+    print-context-two:
+        runs-on: ubuntu-latest
+        steps:            
+            - name: Printing the Env Variables
+              run: |
+                echo "Env Var Workflow value: ${{ env.WORKFLOW_VAR }}"
+                echo "Env Var Overwriten value: ${{ env.OVERWRITTEN_VAR }}"
+                echo "Env var can declared in Workflow level(on top object of the workflow), job level and step level. If a env var declared in top level that same env var declared in job or step level, the lower env var will replace the top level value. TOP LEVEL < JOB LEVEL < STEP LEVEL."
+            
+            - name: Printing the Env Variables two
+              env:
+                OVERWRITTEN_VAR: Step
+              run: |
+                echo "Env Var Workflow value: ${{ env.WORKFLOW_VAR }}"
+                echo "Env Var Overwriten value: ${{ env.OVERWRITTEN_VAR }}"
