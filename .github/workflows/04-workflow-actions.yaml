@@ -12,7 +12,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Install dependencies
       run: npm ci
-     # working-directory: 04-actions-github/my-app - We can directly mention this in defaults to ignore replicate the same values in run object.
+     # working-directory: 04-actions-github/my-app - We can directly mention this in defaults in job name object to ignore replicate the same values in run object.
     - name: Test
       run: npm test
     #  working-directory: 04-actions-github/my-app
