@@ -3,11 +3,12 @@ run-name: 08-Varaibles
 
 on:
     workflow_dispatch:
-    push:
+    # push:
 
 env:
     WORKFLOW_VAR: "Im workflow env var"
     OVERWRITTEN_VAR: "I will be overwritten"
+    UNDEFINED_ENV_VAR: ${{ vars.UNDEFINED_VAR || 'Default-own-value' }}
 
 jobs:
     echo:
@@ -33,4 +34,27 @@ jobs:
                 OVERWRITTEN_VAR: "I will be overwritten in step level"
               run: |
                 echo "OVERWRITTEN VAR: ${{ env.OVERWRITTEN_VAR }}"
-
+    
+    echo-staging:
+        runs-on: ubuntu-latest
+        environment: prod
+        steps:
+            - name: Print the staging env value
+              run: |
+                echo "Staging var value: ${{ vars.TARGET_VAR }}"
+                
+    echo-prod:
+        runs-on: ubuntu-latest
+        environment: prod
+        steps:
+            - name: Print the Prod env value
+              run: |
+                echo "Prod var value: ${{ vars.TARGET_VAR }}"
+                echo "Overwritten value: ${{ vars.OVERWRITTEN_VAR }}"
+    
+    echo-undefined:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print the undefined vr
+              run: |
+                echo "Undefined var: ${{ env.UNDEFINED_ENV_VAR }}"
