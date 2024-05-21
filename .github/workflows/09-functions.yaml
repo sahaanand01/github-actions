@@ -1,0 +1,31 @@
+name: 09-Functions
+on: 
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    echo1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Sleep for 10 seconds
+              run: sleep 10
+            - name: Failed Step
+              run: |
+                exit 1
+            - name: I will skip
+              if: success()
+              run: |
+                echo "I will execute if previous step success"
+            - name: I will execute
+              if: failure()
+              run: |
+                echo "I will execute if any previous step fail."
+            - name: I will execute
+              if: !cancelled()
+              run: |
+                echo "I will always execute"
+            - name: I will execute if cancel
+              if: cancelled()
+              run: |
+                echo "I will execute if the workflow cancelled"
+
