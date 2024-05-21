@@ -8,7 +8,7 @@ on:
               default: false
 
 env:
-   - MY_DEFAULT_VAR: ${{ var.MY_DEFAULT_VAR || 'default_value' }}
+   MY_DEFAULT_VAR: ${{ vars.MY_DEFAULT_VAR || 'default_value' }}
     # We can mention default value to variales if that variable not created or variables having no values
 jobs:
     echo:
