@@ -1,0 +1,29 @@
+name: 07-Expressions
+run-name: 07-Expressions | Debug - ${{ inputs.debug }} | Branch - ${{ github.ref }}
+on:
+    push:
+    workflow_dispatch:
+        inputs:
+            debug:
+              type: boolean
+              default: false
+
+jobs:
+    echo:
+        runs-on: ubuntu-latest
+        steps:
+            - if: ${{ inputs.debug == true }}
+              name: Print start-ip date
+              run: |
+                echo "Triggered by : ${{ github.event_name }}"
+                echo "Branch : ${{ github.ref }}"
+                echo "Commit SHA: ${{ github.sha }}"
+                echo "Runner_OS: ${{ github.run_attempt }}"
+            
+            - if: ${{ inputs.debug == true && github.ref == 'main' }}
+              name: Print when debug is true and triggered from main
+              run: |
+                echo "I Triggered from main"
+            
+            - name: Greeting
+              run : echo "Hello World"
