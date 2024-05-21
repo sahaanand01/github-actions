@@ -1,26 +1,30 @@
 name: 07-Expressions
-run-name: 07-Expressions | Debug - ${{ inputs.debug }} | Branch - ${{ github.ref }}
-on:
-    push:
+run-name: 07-Expressions | Debug - ${{ inputs.debug && 'ON' || 'OFF' }} | Branch - ${{ github.ref }}
+on: 
     workflow_dispatch:
         inputs:
             debug:
               type: boolean
               default: false
 
+env:
+   - MY_DEFAULT_VAR: ${{ var.MY_DEFAULT_VAR || 'default_value' }}
+    # We can mention default value to variales if that variable not created or variables having no values
 jobs:
     echo:
         runs-on: ubuntu-latest
         steps:
-            - if: ${{ inputs.debug == true }}
-              name: Print start-ip date
+            - name : '[debug] Print start-ip date'
+              if: ${{ inputs.debug == true }}  
+              # can also use the if object without the EXPRESSION like below
+              # -if : input.debug == true
               run: |
                 echo "Triggered by : ${{ github.event_name }}"
                 echo "Branch : ${{ github.ref }}"
                 echo "Commit SHA: ${{ github.sha }}"
-                echo "Runner_OS: ${{ github.run_attempt }}"
+                echo "Runner_OS: ${{ runner.os }}"
             
-            - if: ${{ inputs.debug == true && github.ref == 'refs/heads/main' }}
+            - if: inputs.debug && github.ref == 'refs/heads/main'
               name: Print when debug is true and triggered from main
               run: |
                 echo "I Triggered from main"
