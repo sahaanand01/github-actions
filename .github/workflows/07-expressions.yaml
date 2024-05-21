@@ -20,7 +20,7 @@ jobs:
                 echo "Commit SHA: ${{ github.sha }}"
                 echo "Runner_OS: ${{ github.run_attempt }}"
             
-            - if: ${{ inputs.debug == true && github.ref == 'main' }}
+            - if: ${{ inputs.debug == true && github.ref == 'refs/heads/main' }}
               name: Print when debug is true and triggered from main
               run: |
                 echo "I Triggered from main"
