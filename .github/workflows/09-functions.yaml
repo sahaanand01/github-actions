@@ -14,9 +14,8 @@ jobs:
             
             - name: Print the PR Labels
               run: |
-                echo "PR Labels: "
                 cat << EOF
-                  ${{ toJson(github.event.pull_request.labels)}}
+                ${{ toJson(github.event.pull_request.labels) }}
                 EOF
             
             - name: Bug Fix
