@@ -5,6 +5,7 @@ on:
         inputs:
             pass-unit-tests:
                 type: boolean
+                description: To pass or fail the unit tests
                 default: false
 jobs:
     lint-build:
