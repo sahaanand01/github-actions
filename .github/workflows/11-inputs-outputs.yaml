@@ -1,0 +1,38 @@
+name: 11-Inputs-Outputs
+run-name: 11-Inputs-Outputs
+on:
+    workflow_dispatch:
+        inputs:
+            dry-run:
+                type: boolean
+                description: Skip deployment and only print build output
+                default: false
+            target-env:
+                type: environment
+                description: Which evironment the workflow will trigger
+            
+            tag:
+                type: choice
+                description: Release from which to build and deploy
+                options:
+                    - v1
+                    - v2
+                    - v3
+                default: v3
+jobs:
+    build-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Build
+              run: echo "Building from tag ${{ inputs.tag }}"
+    deploy-job:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.target-env }}
+        needs:
+            - build-job
+        if: ${{ !inputs.dry-run }}
+        steps:
+            - name: Deploy
+              run: |
+                echo "Deploying to ${{ inputs.target-env }}"
+              
