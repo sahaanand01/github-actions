@@ -2,3 +2,7 @@ steps:
   - name: 'ubuntu'
     entrypoint: 'bash'
     args: ['-c', 'echo Hello, World!']
+
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args: ['-c', 'echo Hello, Test!']
