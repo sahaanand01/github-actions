@@ -5,6 +5,13 @@ steps:
     - '-c'
     - |
       sed -i 's/${_VERSION}/${_VERSION}/g' k8s-config-files/deployment.yaml
+  
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      cat k8s-config-files/deployment.yaml
 
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
