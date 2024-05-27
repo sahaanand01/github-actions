@@ -9,6 +9,15 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}']
   
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+    - container
+    - clusters
+    - get-credentials
+    - --project="gcp-devops-420503"
+    - --zone="us-east1-b"
+    - "cicd-cluster"
+  
   - name: gcr.io/cloud-builders/kubectl
     args: ['apply', '-f', 'k8s-config-files/deployment.yaml']
     env:
