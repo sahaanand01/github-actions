@@ -12,13 +12,13 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - prepare
-    - --filename=k8s-config-files
+    - --filename='k8s-config-files/deployment.yaml'
     - --image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}
   
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - apply
-    - --filename=k8s-config-files
+    - --filename='k8s-config-files/deployment.yaml'
     - --image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}
     - --location=${_CLOUDSDK_COMPUTE_ZONE}
     - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
