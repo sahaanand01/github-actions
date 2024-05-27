@@ -1,4 +1,11 @@
 steps:
+  - name: 'ubuntu'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      sed -i 's/${_VERSION}/${_VERSION}/g' deployment.yaml
+      
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - prepare
