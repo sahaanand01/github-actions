@@ -9,23 +9,32 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}']
   
-  - name: gcr.io/cloud-builders/gcloud
+  - name: "gcr.io/cloud-builders/gke-deploy"
     args:
-    - container
-    - clusters
-    - get-credentials
-    - --project="gcp-devops-420503"
-    - --zone="us-east1-b"
-    - "cicd-cluster"
+    - run
+    - --filename=k8s-config-files
+    - --image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}
+    - --location=${_CLOUDSDK_COMPUTE_ZONE}
+    - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
+  # - name: gcr.io/cloud-builders/gcloud
+  #   args:
+  #   - container
+  #   - clusters
+  #   - get-credentials
+  #   - --project="gcp-devops-420503"
+  #   - --zone="us-east1-b"
+  #   - "cicd-cluster"
   
-  - name: gcr.io/cloud-builders/kubectl
-    args: ['apply', '-f', 'k8s-config-files/deployment.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+  # - name: gcr.io/cloud-builders/kubectl
+  #   args: ['apply', '-f', 'k8s-config-files/deployment.yaml']
+  #   env:
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
+  #     - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
 
 
 substitutions:
   _PROJECT_ID: 'gcp-devops-420503'
   _IMAGE_NAME: 'gke-cicd'
   _VERSION: '1.0'
+  _CLOUDSDK_COMPUTE_ZONE: 'us-east1-b'
+  _CLOUDSDK_CONTAINER_CLUSTER: 'cicd-cluster'
