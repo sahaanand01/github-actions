@@ -1,0 +1,21 @@
+steps:
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+    - prepare
+    - '--filename=k8s-config-files'
+    - '--image=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}'
+  
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+    - apply
+    - '--filename=k8s-config-files'
+    - '--location=${_CLOUDSDK_COMPUTE_ZONE}'
+    - '--cluster=${_CLOUDSDK_CONTAINER_CLUSTER}'
+
+
+substitutions:
+  _PROJECT_ID: 'gcp-devops-420503'
+  _IMAGE_NAME: 'gke-cicd'
+  _CLOUDSDK_COMPUTE_ZONE: 'us-east1-b'
+  _CLOUDSDK_CONTAINER_CLUSTER: 'cicd-cluster'
+#_VERSION variable is declared in CloudBuild trigger

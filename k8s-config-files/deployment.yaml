@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: gcr.io/gcp-devops-420503/gke-cicd:2.0
+        image: gcr.io/gcp-devops-420503/gke-cicd:$(_VERSION)
         ports:
         - containerPort: 8080
    
