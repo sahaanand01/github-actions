@@ -11,6 +11,10 @@ steps:
   
   - name: gcr.io/cloud-builders/kubectl
     args: ['apply', '-f', 'k8s-config-files/deployment.yaml']
+    env:
+      - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
+      - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+
 
 substitutions:
   _PROJECT_ID: 'gcp-devops-420503'
