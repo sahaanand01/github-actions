@@ -3,7 +3,7 @@ steps:
     entrypoint: 'bash'
     args: ['-c', 'echo Hello, World!']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}']
+    args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}','.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}']
 
