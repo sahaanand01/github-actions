@@ -1,5 +1,5 @@
 resource "google_service_account" "default" {
-  account_id   = "gcp-devops-420503@appspot.gserviceaccount.com"
+  account_id   = "gcp-devops-420503"
   display_name = "Service Account"
 }
 
