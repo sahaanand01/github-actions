@@ -25,25 +25,11 @@ steps:
     - '--filename=k8s-config-files'
     - '--location=${_CLOUDSDK_COMPUTE_ZONE}'
     - '--cluster=${_CLOUDSDK_CONTAINER_CLUSTER}'
-  # - name: gcr.io/cloud-builders/gcloud
-  #   args:
-  #   - container
-  #   - clusters
-  #   - get-credentials
-  #   - --project="gcp-devops-420503"
-  #   - --zone="us-east1-b"
-  #   - "cicd-cluster"
-  
-  # - name: gcr.io/cloud-builders/kubectl
-  #   args: ['apply', '-f', 'k8s-config-files/deployment.yaml']
-  #   env:
-  #     - 'CLOUDSDK_CONTAINER_CLUSTER=cicd-cluster'
-  #     - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
 
 
 substitutions:
   _PROJECT_ID: 'gcp-devops-420503'
   _IMAGE_NAME: 'gke-cicd'
-  _VERSION: '2.0'
+  _VERSION: '3.0'
   _CLOUDSDK_COMPUTE_ZONE: 'us-east1-b'
   _CLOUDSDK_CONTAINER_CLUSTER: 'cicd-cluster'
