@@ -8,14 +8,14 @@ permissions: write-all
 jobs:
     echo-hello:
         runs-on: ubuntu-latest
-        if: github.event.review.state == 'APPROVED'
+        # if: github.event.review.state == 'APPROVED'
         steps:
         - name: Greetings
           run: echo "Hello World"
 
     echo-goodbye:
         runs-on: ubuntu-latest
-        if: github.event.review.state == 'APPROVED'
+        # if: github.event.review.state == 'APPROVED'
         steps:
             - name: Succeed
               run: |
