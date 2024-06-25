@@ -18,8 +18,10 @@ jobs:
         project_id: ${{ secrets.PROJECT_ID }}
 
     - name: Authenticate to GCP
+      env:
+        GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
       run: |
-        echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" > ${HOME}/gcp-key.json
+        echo "${GCP_SERVICE_ACCOUNT_KEY}" > ${HOME}/gcp-key.json
         gcloud auth activate-service-account --key-file=${HOME}/gcp-key.json
 
     - name: Deploy to GCP
