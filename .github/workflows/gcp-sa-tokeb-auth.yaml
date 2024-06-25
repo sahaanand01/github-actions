@@ -23,6 +23,14 @@ jobs:
       run: |
         echo "${GCP_SERVICE_ACCOUNT_KEY}" > ${HOME}/gcp-key.json
         gcloud auth activate-service-account --key-file=${HOME}/gcp-key.json
+        
+    - name: Get GKE credentials
+      run: |
+        gcloud container clusters get-credentials multi-cluster --zone us-central1-c --project k8s-project-425213
+
+    - name: List Kubernetes Pods
+      run: |
+        kubectl get pods
 
     - name: Deploy to GCP
       run: |
