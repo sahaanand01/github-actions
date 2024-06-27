@@ -1,0 +1,41 @@
+name: 11-Inputs Revise
+on:
+    workflow_dispatch: 
+        inputs:
+            wantToPlay:
+                type: boolean
+                description: Do you want to play Valorant ?
+                default: true
+            selectAgent:
+                type: choice
+                description: Choose your agent.
+                options:
+                    - Yoru
+                    - Jett
+                    - Cypher
+                    - Omen
+            selectMap:
+                type: environment
+                description: Choose your map.                
+  
+jobs:
+    selection-summary:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Welcome Message
+              run: echo "Welcome to Valorant Radiant"
+            
+            - name: Selected Agent
+              run: echo "Your selected agent is ${{ inputs.selectAgent }}"
+            
+            - name: Selected Map
+              run: echo "Your selected agent is ${{ inputs.selectMap }}"
+    
+    game-start:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Starting the game
+              run : echo "THree Two One"
+            
+            - name: Started
+              run: echo "Game started go radient get some immortals flesh."
