@@ -15,8 +15,13 @@ on:
                     - Reyna
                     - Jett
             selected-map:
-                type: environment
+                type: choice
                 description: select your map
+                options:
+                    - Haven
+                    - Ascent
+                    - Icebox
+                    - Breeze
             
 jobs:
     agent-map-selection:
