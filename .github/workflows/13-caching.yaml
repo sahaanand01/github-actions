@@ -33,7 +33,7 @@ jobs:
             
             - name: Use Cache Dependencies
               uses: actions/cache@v3
-              if: ${{ inputs.use-cache != true }}
+              if: ${{ inputs.use-cache == true }}
               with:
                 path: 13-caching/react-app/node_modules
                 key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
