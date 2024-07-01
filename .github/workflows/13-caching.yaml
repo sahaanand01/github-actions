@@ -7,6 +7,14 @@ on:
                 type: boolean
                 description: Whether to execute cache step
                 default: true
+            node-version:
+                type: choice
+                description: Select the node version
+                options:
+                    - 18.x
+                    - 20.x
+                    - 21.x
+                default: 20.x
 
 jobs:
     build:
@@ -21,9 +29,18 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                node-version: 20.x
-
+                node-version: ${{ inputs.node-version }}
+            
+            - name: Use Cache Dependencies
+              uses: actions/cache@v3
+              if: ${{ inputs.use-cache != true }}
+              with:
+                path: 13-caching/react-app/node_modules
+                key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
+              id: cache
+                      
             - name: Install dependencies
+              if: ${{ steps.cache.outputs.cache-hit != 'true' }}
               run: npm ci
 
             - name: Testing
@@ -31,7 +48,7 @@ jobs:
 
             - name: Building
               run: npm run build
-              
+
             - name: Deploying to Non-prod
               run: echo "Deployed to Non-Prod"
               
