@@ -37,7 +37,7 @@ jobs:
     
     echo-staging:
         runs-on: ubuntu-latest
-        environment: staging
+        environment: ascent
         steps:
             - name: Print the staging env value
               run: |
@@ -45,7 +45,7 @@ jobs:
                 
     echo-prod:
         runs-on: ubuntu-latest
-        environment: prod
+        environment: haven
         steps:
             - name: Print the Prod env value
               run: |
