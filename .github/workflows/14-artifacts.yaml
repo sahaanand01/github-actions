@@ -20,11 +20,13 @@ jobs:
             
             - name: Download Cached Dependency
               uses: actions/cache@v3
+              id: cache
               with:
                 path: 14-caching/react-app/node_modules
                 key: deps-node-modules-${{ hashFiles('13-caching/react-app/package-lock.json') }}
             
             - name: Install Dependencies
+              if: ${{ steps.cache.outputs.cache-hit != 'true'}}
               run: npm ci
 
             - name: Run Test
@@ -37,7 +39,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: app
-                path: 14-caching/react-app/build
+                path: 13-caching/react-app/build
             
     deploy:
         runs-on: ubuntu-latest
