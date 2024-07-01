@@ -90,14 +90,14 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: 13-cachine/react-app
+                working-directory: 13-caching/react-app
         needs:
             - install-deps
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
             
-            - name: Setup NOde
+            - name: Setup Node
               uses: actions/setup-node@v4
               with:
                 node-version: ${{ inputs.node-version }}
