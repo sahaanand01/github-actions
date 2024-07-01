@@ -15,13 +15,17 @@ on:
                     - Reyna
                     - Jett
             selected-map:
-                type: choice
+                type: environment
                 description: select your map
-                options:
-                    - Haven
-                    - Ascent
-                    - Icebox
-                    - Breeze
+                
+            # selected-map:
+            #     type: choice
+            #     description: select your map
+            #     options:
+            #         - Haven
+            #         - Ascent
+            #         - Icebox
+            #         - Breeze
             
 jobs:
     agent-map-selection:
@@ -38,7 +42,7 @@ jobs:
                 echo "wannaPlay=${{ inputs.wanna-play-val }}" >> $GITHUB_OUTPUT
                 cat $GITHUB_OUTPUT
                 echo "selectedAgent=${{ inputs.selected-agent }}" >> $GITHUB_OUTPUT
-                echo "selectedMap"=${{ inputs.selected-map }}" >> $GITHUB_OUTPUT"
+                echo "selectedMap"=${{ inputs.selected-map }}" >> $GITHUB_OUTPUT
     
     match-start:
         runs-on: ubuntu-latest
