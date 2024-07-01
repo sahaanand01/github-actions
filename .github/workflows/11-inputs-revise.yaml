@@ -1,4 +1,5 @@
 name: 11-Inputs Revise
+run-name: 11-Inputs Revise
 on:
     workflow_dispatch: 
         inputs:
@@ -29,7 +30,7 @@ jobs:
               run: echo "Your selected agent is ${{ inputs.selectAgent }}"
             
             - name: Selected Map
-              run: echo "Your selected agent is ${{ inputs.selectMap }}"
+              run: echo "Your selected map is ${{ inputs.selectMap }}"
     
     game-start:
         runs-on: ubuntu-latest

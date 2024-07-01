@@ -1,0 +1,46 @@
+name: 12-Outputs-Revise
+run-name: 12-Outputs-Revise
+on:
+    workflow_dispatch:
+        inputs:
+            wanna-play-val:
+                type: boolean
+                description: Want to play valorant
+            selected-agent:
+                type: choice
+                description: Choose your agent
+                options:
+                    - Yoru
+                    - Cypher
+                    - Reyna
+                    - Jett
+            selected-map:
+                type: environment
+                description: select your map
+            
+jobs:
+    agent-map-selection:
+        runs-on: ubuntu-latest
+        outputs:
+            output-wanna-play: ${{ steps.selection-id.outputs.wannaPlay }}
+            output-selected-agent: ${{ steps.selection-id.outputs.selectedAgent }}
+            output-selected-map: ${{ steps.selection-id.outputs.selectedMap }}
+        
+        steps:
+            - name: Setting the outputs
+              id: selection-id
+              run: |
+                echo "wannaPlay=${{ inputs.wanna-play-val }}" >> $GITHUB_OUTPUT
+                cat $GITHUB_OUTPUT
+                echo "selectedAgent=${{ inputs.selected-agent }}" >> $GITHUB_OUTPUT
+                echo "selectedMap"=${{ inputs.selected-map }}" >> $GITHUB_OUTPUT"
+    
+    match-start:
+        runs-on: ubuntu-latest
+        needs:
+            - agent-map-selection
+        steps:
+            - name: Print Selected Agent & Map
+              run: |
+                echo "Selected Agent is ${{ needs.agent-map-selection.outputs.output-selected-agent }}"
+                echo "Selected Map is ${{ needs.agent-map-selection.outputs.output-selected-map }}"
